@@ -13,8 +13,8 @@
 <body>
     <header>
         <h1>En Busca del Tesoro</h1>
-        <div id=mensaje>
-            <h2 id="mensLuchar">A luchar héroe: (nombre introducido)</h2>
+        <div id="mensaje">
+            <h2 id="mensLuchar">A luchar héroe: <span id='nom'></span></h2>
         </div>
     </header>
 
@@ -22,14 +22,12 @@
         
 
         <div id="inputs">
-            <form action="validacion.php" method="post" name="formulario" id="miFormulario">
                 <input type="text" id="name" name="name" placeholder="Como te llamas?" minlength="4"
                 pattern="[A-Za-z]{4,}"
                required><br/>
                 <p id="errorName"></p>
                 <input type="submit" id= "enviar" value="Introducir Nombre">
-            </form>
-            <div id=alerta> MENSAJE DE ALERTA </div>
+            <div id="alerta"> MENSAJE DE ALERTA </div>
         </div>
         <!--Botón deshabilitado hasta introducir correctamente nombre y recibir respuesta OK de servidor-->
         <button id="jugar" class="miBoton" disabled>Jugar</button>
