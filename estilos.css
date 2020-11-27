@@ -1,0 +1,137 @@
+body {
+    margin: 0px;
+    padding: 0px;
+    font-family: 'Paytone One', sans-serif;
+    /*overflow: hidden;*/
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 100vw;
+    min-height: 100vh;
+    background: linear-gradient(rgb(40, 33, 138), rgb(105, 126, 184), #ffff)
+}
+
+#main {
+    margin: 1rem 0rem;
+    min-width: 60vw;
+    min-height: 80vh;
+    background: linear-gradient(145deg, #ffffff, #e3e3e3);
+    box-shadow:  8px 8px 14px rgb(105, 126, 184);
+    border-radius: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: rgb(105, 126, 184);
+    font-weight: 500;
+}
+
+#inputs {
+    
+    padding: 0.5rem;
+    line-height: 1.5;
+}
+
+label {
+    font-weight: 600;
+}
+
+input[type=text] {
+ width: 100%;
+  padding: 8px 16px;
+  margin: 4px 0;
+  display: inline-block;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+}
+
+
+h1 {
+    font-size: 30px;
+    color:rgb(216, 240, 239);
+    text-align: center;
+    margin: 2px;
+}
+h2 {
+    font-size: 25px;
+    color:rgb(26, 224, 218);
+    font-weight: 400px;
+    margin: 2px;
+}
+
+input[type=submit] {
+    width: 90%;
+    display: block;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    background-color:  rgb(105, 126, 184);
+    color: white;
+    padding: 14px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  input[type=submit]:hover {
+    background-color: rgb(40, 33, 138)
+  }
+
+
+/* Espacio para las casillas */
+.tablero {
+    display: block; /* la visualización de la agrupación sea fija  */ 
+    flex-wrap: wrap; /* agrupación de los elementos */
+    align-items: center;
+    justify-content: center;
+    height: 470px;
+    width: 500px;
+    margin: auto;
+}
+
+/* Estilo de las casillas */
+.miestilo {
+    box-shadow:  5px 5px #ccc;
+    margin: 5px;
+    padding: 5px;
+    border-radius: 5rem;
+    width: 90px;
+    height: 90px;
+}
+
+#alerta {
+    display: none;
+    align-items: center;
+    justify-content: center;
+}
+
+#jugar {
+    display: none;
+    padding: 0.5rem;
+    font-weight: 400;
+    color: purple;
+    background: white;
+    font-size: 1.2vw;
+    border-radius: 0.5rem;
+    /* center the button */
+    left: 50%;
+}
+
+#jugar:hover {
+    background-color: purple;
+    color: white;
+    font-weight: 400;
+}
+
+
+/* contador, temporizador y resultado */
+.extras {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    max-width: 20vw;
+}
+
+
+  
