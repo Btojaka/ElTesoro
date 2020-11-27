@@ -9,7 +9,7 @@ body {
     justify-content: center;
     min-width: 100vw;
     min-height: 100vh;
-    background: linear-gradient(rgb(40, 33, 138), rgb(105, 126, 184), #ffff)
+    background: linear-gradient(rgb(30, 6, 241), rgb(231, 136, 28), #ffff)
 }
 
 #main {
@@ -54,20 +54,20 @@ h1 {
     margin: 2px;
 }
 h2 {
-    font-size: 25px;
-    color:rgb(26, 224, 218);
-    font-weight: 400px;
+    font-size: 20px;
+    color:white;
+    font-weight: 100px;
     margin: 2px;
 }
 
 input[type=submit] {
-    width: 90%;
+    width: 70%;
     display: block;
     margin: auto;
     margin-top: 1rem;
     margin-bottom: 1rem;
     background-color:  rgb(105, 126, 184);
-    color: white;
+    color: black;
     padding: 14px 20px;
     border: none;
     border-radius: 4px;
@@ -75,7 +75,8 @@ input[type=submit] {
   }
   
   input[type=submit]:hover {
-    background-color: rgb(40, 33, 138)
+    background-color: rgb(40, 33, 138);
+    color: white;
   }
 
 
@@ -107,19 +108,21 @@ input[type=submit] {
 }
 
 #jugar {
-    display: none;
+    display: block;
     padding: 0.5rem;
-    font-weight: 400;
-    color: purple;
-    background: white;
-    font-size: 1.2vw;
+    font-weight: 200;
+    font-size: 1.5vw;
     border-radius: 0.5rem;
-    /* center the button */
-    left: 50%;
+    width: 30%;
+    background-color:  rgb(204, 149, 31);
+    color: black;
+    padding: 14px 20px;
+    border: none;
+    cursor: pointer;
 }
 
 #jugar:hover {
-    background-color: purple;
+    background-color: rgb(248, 144, 7);
     color: white;
     font-weight: 400;
 }
