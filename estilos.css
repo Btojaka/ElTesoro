@@ -106,8 +106,8 @@ input[type=submit] {
     align-items: center;
     justify-content: center;
 }
-
-#jugar {
+/* boton cuando está habilitado */
+#jugar:enabled {
     display: block;
     padding: 0.5rem;
     font-weight: 200;
@@ -120,12 +120,20 @@ input[type=submit] {
     border: none;
     cursor: pointer;
 }
-
-#jugar:hover {
+/* cuando está habilitado*/
+#jugar:hover:enabled {
     background-color: rgb(248, 144, 7);
     color: white;
     font-weight: 400;
 }
+/* cuando el botoón está deshabilitado*/
+#jugar:disabled{
+     border: 1px solid #999999;
+     background-color: #cccccc;
+     color: #666666;
+}
+
+
 
 
 /* contador, temporizador y resultado */
