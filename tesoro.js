@@ -3,6 +3,7 @@ window.onload=
         //el botón enviar inicia la función validar
         document.getElementById("enviar").addEventListener('click', validar, false);
 }
+
         console.log("recargando");
         //captura la respuesta introducida y la valida
         let validarNombre = () =>{
@@ -44,7 +45,7 @@ window.onload=
   
 
         //función que llama a realizar validaciones
-        let validar = () => {
+        let validar = (e) => {
             alert("START");
             validarNombre();
             validacionFinal()
