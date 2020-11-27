@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf8"/>
+    <meta name='author' content='Bonay Tojaka'/>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="descripcion" content="Juego de habilidad para dar menos pasos buscando el tesoro" />
+    <title>En busca del Tesoro</title>
+    <link rel="stylesheet" href="estilos.css">
+    <link href="https://fonts.googleapis.com/css2?family=Paytone+One&display=swap" rel="stylesheet">
+    <script src="./tesoro.js"></script>
+</head>
+<body>
+    <header>
+        <h1>En Busca del Tesoro</h1>
+        <div id=mensaje>
+            <h2 id="mensLuchar">A luchar héroe: (nombre introducido)</h2>
+        </div>
+    </header>
+
+    <section id="main">
+        
+
+        <div id="inputs">
+            <form action="validacion.php" method="post" name="formulario" id="miFormulario">
+                <input type="text" id="name" name="name" placeholder="Como te llamas?" minlength="4"
+                pattern="[A-Za-z]"
+               required><br/>
+                <input type="submit" value="Introducir Nombre">
+            </form>
+            <div id=alerta> MENSAJE DE ALERTA </div>
+        </div>
+        <button id="jugar" class="miBoton">Jugar</button>
+
+        <div class="tablero">
+        </div>
+       
+    </section>
+    <section class="extras">
+        <h4>Número de Tiradas: <span id="contador"></span> </h4>
+    </section>
+    
+        
+
+    
+    <footer>
+        <h4>Bonay R. Tojaka</h4>
+    </footer>
+    
+</body>
+</html>
