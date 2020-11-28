@@ -4,6 +4,7 @@ window.onload= function(){
     document.getElementById("enviar").addEventListener('click', validar, false);
     // cuando pulse jugar
     document.getElementById("jugar").addEventListener('click', partida, false);
+    
 }
 
         console.log("recargando");
@@ -25,11 +26,12 @@ window.onload= function(){
                 }
                 return false;
             }
+            return true;
         }
 
         let validacionFinal = () => {
-            if(validarNombre) {
-                return false;
+            if(validarNombre()) {
+                return true;
             } else {
             //cancela el evento (enviar a servidor) si la validación es false
             e.preventDefault();
@@ -47,9 +49,10 @@ window.onload= function(){
         //función que llama a realizar validaciones
         let validar = (e) => {
             //alert("START");
-            validarNombre();
-            validacionFinal()
-            if (validacionFinal){
+            //validarNombre();
+            //validacionFinal()
+            if (validacionFinal()){
+                //alert(validacionFinal);
                 solitictud();
             }
             //alert("STOP");
@@ -105,7 +108,9 @@ let solitictud = () => {
 
 
 let partida = () =>{
-    document.getElementById("jugar").style.display = "none";
+    
+    document.getElementById("enviar").style.display = "none";
+
     // imagenes
     const pirata = {
         name: "pirata",
@@ -150,39 +155,103 @@ let partida = () =>{
     // tablero
     let tablero = document.querySelector(".tablero");
 
-
     // 1. Crear tablero 
     const imagTablero = [
         pirata,
         grass,
         cofreLock
     ]
+
+    const dado = [
+        face1,
+        face2,
+        face3,
+        face4,
+        face5,
+        face6
+    ]
     function crearTablero() {
+        if(document.getElementById("tablero")){
+            document.getElementById("tablero").innerHTML = "";
+        } 
+    
+        
+        let i_celda= 0;
+        let table = document.createElement("table");
+        tablero.appendChild(table);
+       
         for (let i = 0; i < 10; i++) {
-            for(let j=0; j<10; j++){
-                let celda = document.createElement("img");
-                celda.setAttribute("src", "./images/grass.png");
-                celda.setAttribute("data-id", i); 
-                celda.classList.add("miestilo");
-            // carta.addEventListener("click", girarCarta);
-                tablero.appendChild(celda);
-            }        
-        }
-    }  
-    function borrarTablero() {
-        for (let i = 0; i < 10; i++) {
-            
-            for(let j=0; j<10; j++){
-                let celda= document.querySelector("img")
-                document.getElementById('tablero').removeChild(celda);   
-            }
-        }
+            let fila = document.createElement("tr");
+            table.appendChild(fila)
+                for (let j = 0; j < 10; j++) {
+                let celda = document.createElement("td");
+                let imagen = document.createElement("img");
+                celda.setAttribute("id", i_celda);
+                imagen.classList.add("miestilo");
+
+                imagen.setAttribute("src", imagTablero[1].img);
+                
+                fila.appendChild(celda);
+                celda.appendChild(imagen);
+                i_celda++;
+            } 
+            //document.getElementById('0').           
+        } 
+        let hero = document.getElementById('0');
+        let cofre = document.getElementById('99');
+        let imagenH = hero.getElementsByTagName('img'); // array
+        let imagenC = cofre.getElementsByTagName('img');
+        imagenH[0].setAttribute("src", imagTablero[0].img) ;
+        imagenC[0].setAttribute("src", imagTablero[2].img) ;
+
+        //document.getElementById('0').document.getElementByTagName('img').setAttribute("src", imagTablero[2].img);
+        //table.querySelector('tr > #0 > img').setAttribute("src",imagTablero[0].img);  
+        //table.querySelector('#99 > img').setAttribute("src",imagTablero[2].img);        
+    } 
+
+    document.getElementById("dado").style.display = "block"; // aparece el boton dado
+    let padreDado = document.getElementById("padreDado");
+
+    // 2. creo dado 
+    let crearDado = () =>{
+        
+        document.getElementById("padreDado").innerHTML="";
+        
+        //crea imagen dado 
+        let imgDado = document.createElement('img');
+        imgDado.setAttribute("src", dado[0].img);
+        imgDado.setAttribute("id", "iDado" )
+        padreDado.appendChild(imgDado);
     }
-    // borra tablero existente
-    borrarTablero();
-    // crea nuevo tablero
+
+    let modifDado = () =>{
+        let imgDado = document.getElementById('iDado');
+        let numero = Math.floor(Math.random() * (7 - 1)) + 1;
+        imgDado.setAttribute("src", dado[numero-1].img);
+
+    }
+    
+    // cuando pulse tirar dado
+    document.getElementById("dado").addEventListener('click', modifDado, false);
+
+
+    
+    // function borrarTablero() {
+    //     for (let i = 0; i < 10; i++) {
+            
+    //         for(let j=0; j<10; j++){
+    //             let celda= document.querySelector("img")
+    //             document.getElementById('tablero').removeChild(celda);   
+    //         }
+    //     }
+    // }
+    // // borra tablero existente
+    // borrarTablero();
+    // // crea nuevo tablero
     crearTablero();
-    // 2. Generar imagen dado con la cara 1 ( y su boton)
+    crearDado();
+    
+    
     // 3. Funcion lanzar dado cuando click en boton
     // 4. Opciones mover
 
