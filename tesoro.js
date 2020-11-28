@@ -66,15 +66,14 @@ let solitictud = () => {
     let httpRequest= new XMLHttpRequest();
 
     // Abrimos la conexion
-    httpRequest.open("POST", "https://apuntesfpinformatica.es/DWEC/entregable1-2.php", true);
-    //alert("Hola");
-    console.log(httpRequest);
+    httpRequest.open("POST", "https://apuntesfpinformatica.es/DWEC/entregable1-2.php", true); // servidor utilizado para la prácitca
+    //console.log(httpRequest);
 
     httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    console.log(httpRequest);
-    //alert('hola');
+    //console.log(httpRequest);
+
     
-    httpRequest.onreadystatechange=function(){ // AQUI NO ENTRA 
+    httpRequest.onreadystatechange=function(){ // estados por los que pasa la petición  
         
 
         if(httpRequest.readyState==2){
@@ -87,7 +86,8 @@ let solitictud = () => {
             // alert("ya estoy en 4");
             // alert(httpRequest.status);
         if (httpRequest.status==200){
-            alert(httpRequest.responseText+ " " + document.getElementById('name').value.length);
+
+           // alert(httpRequest.responseText+ " " + document.getElementById('name').value.length);
 
                 if(httpRequest.responseText === 'OK'){
                     document.getElementById("jugar").style.display = "block";
@@ -100,7 +100,7 @@ let solitictud = () => {
         } 
         }
     }
-    httpRequest.send("nombre=" + document.getElementById('name').value); // OJO REPASAR
+    httpRequest.send("nombre=" + document.getElementById('name').value); // lo que se envía al servidor
     // alert(httpRequest.status);
     // console.log(httpRequest);
 
@@ -108,7 +108,7 @@ let solitictud = () => {
 
 
 let partida = () =>{
-    
+    // boton introducir nombre se esconde
     document.getElementById("enviar").style.display = "none";
 
     // imagenes
@@ -152,6 +152,7 @@ let partida = () =>{
         name: "6",
         img: "./images/6.png"
     };
+
     // tablero
     let tablero = document.querySelector(".tablero");
 
@@ -197,18 +198,13 @@ let partida = () =>{
             } 
             //document.getElementById('0').           
         } 
-        let hero = document.getElementById('0');
-        let cofre = document.getElementById('99');
+        let hero = document.getElementById('0'); // celda con id 0
+        let cofre = document.getElementById('99'); // celda con id 99
         let imagenH = hero.getElementsByTagName('img'); // array
-        let imagenC = cofre.getElementsByTagName('img');
-        imagenH[0].setAttribute("src", imagTablero[0].img) ;
-        imagenC[0].setAttribute("src", imagTablero[2].img) ;
-
-        //document.getElementById('0').document.getElementByTagName('img').setAttribute("src", imagTablero[2].img);
-        //table.querySelector('tr > #0 > img').setAttribute("src",imagTablero[0].img);  
-        //table.querySelector('#99 > img').setAttribute("src",imagTablero[2].img);        
-    } 
-
+        let imagenC = cofre.getElementsByTagName('img'); // array
+        imagenH[0].setAttribute("src", imagTablero[0].img) ; // casilla con imagen de pirata
+        imagenC[0].setAttribute("src", imagTablero[2].img) ; // casilla con imagen de cofre cerrado
+    }
     document.getElementById("dado").style.display = "block"; // aparece el boton dado
     let padreDado = document.getElementById("padreDado");
 
@@ -231,31 +227,20 @@ let partida = () =>{
 
     }
     
+    // 4. Opciones mover
+
+    // obtener id celda y num dado para dar las opciones => (id celda +-num dado) [sino cambiar de decena] y id+-(num dado*10) [sin >99 ni < 0]
+
+    
     // cuando pulse tirar dado
     document.getElementById("dado").addEventListener('click', modifDado, false);
 
-
-    
-    // function borrarTablero() {
-    //     for (let i = 0; i < 10; i++) {
-            
-    //         for(let j=0; j<10; j++){
-    //             let celda= document.querySelector("img")
-    //             document.getElementById('tablero').removeChild(celda);   
-    //         }
-    //     }
-    // }
-    // // borra tablero existente
-    // borrarTablero();
-    // // crea nuevo tablero
     crearTablero();
     crearDado();
     
     
-    // 3. Funcion lanzar dado cuando click en boton
-    // 4. Opciones mover
+    
+   
 
 }
-
-
 
