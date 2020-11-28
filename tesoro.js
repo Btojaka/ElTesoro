@@ -1,4 +1,4 @@
-// que ocurre una vez cargada la ventana
+// que ocurre una vez cargada la ventana 
 window.onload= function(){
     // cuando pulse enviar
     document.getElementById("enviar").addEventListener('click', validar, false);
@@ -111,7 +111,7 @@ let partida = () =>{
         name: "pirata",
         img: "./images/piratilla.png"
     };
-    const suelo = {
+    const grass = {
         name: "grass",
         img: "./images/grass.png"
     };
@@ -148,34 +148,39 @@ let partida = () =>{
         img: "./images/6.png"
     };
     // tablero
-    const tablero = document.querySelector(".tablero");
+    let tablero = document.querySelector(".tablero");
 
 
     // 1. Crear tablero 
     const imagTablero = [
         pirata,
-        suelo,
+        grass,
         cofreLock
     ]
-     function crearTablero() {
+    function crearTablero() {
         for (let i = 0; i < 10; i++) {
-            let celda = document.createElement("img");
-            celda.setAttribute("src", "./images/suelo.svg");
-            celda.setAttribute("data-id", i); 
-            celda.classList.add("miestilo");
             for(let j=0; j<10; j++){
-                celda = document.createElement("img");
-            celda.setAttribute("src", "./images/suelo.svg");
-            celda.setAttribute("data-id", j); 
-            celda.classList.add("miestilo");
-           // carta.addEventListener("click", girarCarta);
-            tablero.appendChild(celda);
-            }
-            
+                let celda = document.createElement("img");
+                celda.setAttribute("src", "./images/grass.png");
+                celda.setAttribute("data-id", i); 
+                celda.classList.add("miestilo");
+            // carta.addEventListener("click", girarCarta);
+                tablero.appendChild(celda);
+            }        
         }
-        
+    }  
+    function borrarTablero() {
+        for (let i = 0; i < 10; i++) {
+            
+            for(let j=0; j<10; j++){
+                let celda= document.querySelector("img")
+                document.getElementById('tablero').removeChild(celda);   
+            }
+        }
     }
-
+    // borra tablero existente
+    borrarTablero();
+    // crea nuevo tablero
     crearTablero();
     // 2. Generar imagen dado con la cara 1 ( y su boton)
     // 3. Funcion lanzar dado cuando click en boton

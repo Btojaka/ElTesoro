@@ -17,11 +17,7 @@
             <h2 id="mensLuchar">A luchar héroe: <span id='nom'></span></h2>
         </div>
     </header>
-
-    <section id="main">
-        
-
-        <div id="inputs">
+            <div id="inputs">
                 <input type="text" id="name" name="name" placeholder="Como te llamas?" minlength="4"
                 pattern="[A-Za-z]{4,}"
                required><br/>
@@ -29,10 +25,12 @@
                 <input type="submit" id= "enviar" value="Introducir Nombre">
             <div id="alerta"> MENSAJE DE ALERTA </div>
         </div>
-        <!--Botón deshabilitado hasta introducir correctamente nombre y recibir respuesta OK de servidor-->
+
+    <section id="main">
+          <!--Botón deshabilitado hasta introducir correctamente nombre y recibir respuesta OK de servidor-->
         <button id="jugar" class="miBoton" disabled>Jugar</button>
 
-        <div class="tablero">
+        <div class="tablero" id="tablero">
         </div>
        
     </section>

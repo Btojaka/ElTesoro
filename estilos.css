@@ -15,7 +15,7 @@ body {
 #main {
     margin: 1rem 0rem;
     min-width: 90vw;
-    min-height: 90vh;
+    min-height: 100vh;
     background: linear-gradient(145deg, #ffffff, #e3e3e3);
     box-shadow:  8px 8px 14px rgb(105, 126, 184);
     border-radius: 0.5rem;
@@ -93,7 +93,7 @@ input[type=submit] {
 
 /* Estilo de las celdas */
 .miestilo {
-    border-radius: 5rem;
+    border-radius: 2rem;
     width: 9vw;
     height: 9vh;
 }
