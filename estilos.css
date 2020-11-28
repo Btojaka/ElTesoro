@@ -14,8 +14,8 @@ body {
 
 #main {
     margin: 1rem 0rem;
-    min-width: 60vw;
-    min-height: 80vh;
+    min-width: 90vw;
+    min-height: 90vh;
     background: linear-gradient(145deg, #ffffff, #e3e3e3);
     box-shadow:  8px 8px 14px rgb(105, 126, 184);
     border-radius: 0.5rem;
@@ -83,22 +83,19 @@ input[type=submit] {
 /* Espacio para las casillas */
 .tablero {
     display: block; /* la visualización de la agrupación sea fija  */ 
-    flex-wrap: wrap; /* agrupación de los elementos */
+    flex-wrap: wrap; /*agrupación de los elementos */
     align-items: center;
     justify-content: center;
-    height: 470px;
-    width: 500px;
-    margin: auto;
-}
+    width: 90vw;
+    height: 90vh;
+    
+    }
 
-/* Estilo de las casillas */
+/* Estilo de las celdas */
 .miestilo {
-    box-shadow:  5px 5px #ccc;
-    margin: 5px;
-    padding: 5px;
     border-radius: 5rem;
-    width: 90px;
-    height: 90px;
+    width: 9vw;
+    height: 9vh;
 }
 
 #alerta {
@@ -124,7 +121,7 @@ input[type=submit] {
 #jugar:hover:enabled {
     background-color: rgb(248, 144, 7);
     color: white;
-    font-weight: 400;
+    font-weight: 200;
 }
 /* cuando el botoón está deshabilitado*/
 #jugar:disabled{
@@ -133,9 +130,6 @@ input[type=submit] {
      color: #666666;
 }
 
-
-
-
 /* contador, temporizador y resultado */
 .extras {
     display: flex;
@@ -143,6 +137,3 @@ input[type=submit] {
     align-items: center;
     max-width: 20vw;
 }
-
-
-  
