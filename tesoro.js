@@ -171,7 +171,7 @@ let partida = () =>{
         face5,
         face6
     ]
-    function crearTablero() {
+    let crearTablero = () => {
         if(document.getElementById("tablero")){
             document.getElementById("tablero").innerHTML = "";
         } 
@@ -198,12 +198,18 @@ let partida = () =>{
             } 
             //document.getElementById('0').           
         } 
-        let hero = document.getElementById('0'); // celda con id 0
+
+        /////////******CAMBIO PRUEBA*******/////////
+        let heroina = document.getElementById('15'); // celda con id 0
+        //console.log(heroina.id); // pruebas
         let cofre = document.getElementById('99'); // celda con id 99
-        let imagenH = hero.getElementsByTagName('img'); // array
+        let imagenH = heroina.getElementsByTagName('img'); // array
         let imagenC = cofre.getElementsByTagName('img'); // array
         imagenH[0].setAttribute("src", imagTablero[0].img) ; // casilla con imagen de pirata
         imagenC[0].setAttribute("src", imagTablero[2].img) ; // casilla con imagen de cofre cerrado
+
+        return heroina.id;
+
     }
     document.getElementById("dado").style.display = "block"; // aparece el boton dado
     let padreDado = document.getElementById("padreDado");
@@ -225,22 +231,66 @@ let partida = () =>{
         let numero = Math.floor(Math.random() * (7 - 1)) + 1;
         imgDado.setAttribute("src", dado[numero-1].img);
 
+        console.log("dentro de modificar: " + numero);
+        return numero; // devuelve el numero que sale en el dado
+
     }
     
     // 4. Opciones mover
 
     // obtener id celda y num dado para dar las opciones => (id celda +-num dado) [sino cambiar de decena] y id+-(num dado*10) [sin >99 ni < 0]
+    let opcionesMov = (id, num) =>{
+        // 15 celda
+        //4 dado
+        let ella =  parseInt(id); // string a number
+        let dice = num;
 
-    
-    // cuando pulse tirar dado
-    document.getElementById("dado").addEventListener('click', modifDado, false);
+        // operaciones con las que se obtienen los id de las celdas donde puede moverse la heroína
+        let suma = ella + dice; // 19
+        console.log(suma);
+        let resta = ella - dice;  // -1
+        let sMulti = ella + (10 * dice); // 32
+        let rMulti = ella - (10 * dice); // 
+        let maxS = 10-(ella+1); // 7 
+        let maxR = ella; // 2
+        let maxMs =  ella + 10 * (10-(ella+1)); //72
+        let maxMr = 10*ella;
 
-    crearTablero();
+        if (ella <= maxS ){
+            //alert("estoy cambiando el borde a rojo");
+            document.getElementById(`${suma}`).style.border = 'solid 5px rgb(214, 86, 118)';
+        }
+        if (dice <= maxR){
+            document.getElementById(`${resta}`).style.border = 'solid 5px rgb(214, 86, 118)';
+        }
+        if (sMulti <= maxMs ){
+            document.getElementById(`${sMulti}`).style.border = 'solid 5px rgb(214, 86, 118)';
+        }
+        if (rMulti<= maxMr){
+            document.getElementById(`${sMulti}`).style.border = 'solid 5px rgb(214, 86, 118)';
+        }
+
+
+
+    }
+    ///////////// AQUI ESTA EL FALLO  ************************
+
+    let tirada = (id) =>{
+        // guarda numero del dado en un a variable (NO GUARDA UN NUMERO)
+        //let numDado =  
+        document.getElementById("dado").addEventListener('click', modifDado, false); 
+        let pruebaDado= 4;
+        let idH = id;
+        // console.log("idH: "+idH);
+        // console.log("numDado =  " +numDado);
+        opcionesMov(idH, pruebaDado); // CAMBIAR A numDado
+    }
+
+    //let celdaH = 
+    let idHeroina = crearTablero();
     crearDado();
-    
-    
-    
-   
-
+    tirada(idHeroina)
+    // cuando pulse tirar dado 
+      
 }
 
