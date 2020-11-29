@@ -156,7 +156,7 @@ let partida = () =>{
         let i_celda= 0;
         let table = document.createElement("table");
         tablero.appendChild(table);
-       
+
         for (let i = 0; i < 10; i++) {
             let fila = document.createElement("tr");
             table.appendChild(fila)
@@ -165,9 +165,7 @@ let partida = () =>{
                 let imagen = document.createElement("img");
                 celda.setAttribute("id", i_celda);
                 imagen.classList.add("miestilo");
-
                 imagen.setAttribute("src", imagTablero[1].img);
-                
                 fila.appendChild(celda);
                 celda.appendChild(imagen);
                 i_celda++;
@@ -218,9 +216,9 @@ let partida = () =>{
             let busca = lugarI[i].src.search("/images/piratilla.png");
             if (busca != -1){
 
-             let idPadre = lugarI[i].parentElement.id; // devuelve id del elemento padre de lugarI[i]
-             console.log("padre: "+idPadre);
-                return idPadre;
+            let idPadre = lugarI[i].parentElement.id; // devuelve id del elemento padre de lugarI[i]
+            console.log("padre: "+idPadre);
+            return idPadre;
             }
         }
 
@@ -237,35 +235,114 @@ let partida = () =>{
 
         // operaciones con las que se obtienen los id de las celdas donde puede moverse la heroína
         let suma = ella + dice; // 19
-        console.log(dice); //num
-        console.log(ella); // nan
-        console.log(suma);
         let resta = ella - dice;  // -1
         let sMulti = ella + (10 * dice); // 32
         let rMulti = ella - (10 * dice); // 
-        let maxS = 10-(ella+1); // 7 
+        let maxS = 10-(ella+1); // 19  // esta mal hecha
         let maxR = ella; // 2
         let maxMs =  ella + 10 * (10-(ella+1)); //72
-        let maxMr = 10*ella;
-
+        //let maxMr = 10*ella; // no esta bien
+        let opcion1;
+        let opcion2;
+        let opcion3;
+        let opcion4;
         if (ella <= maxS ){
-            //alert("estoy cambiando el borde a rojo");
             document.getElementById(`${suma}`).style.border = 'solid 5px rgb(214, 86, 118)';
+            opcion1 =suma;
+            
+        }else{ // si no, se vacía variable
+            opcion1="";
         }
-        if (dice <= maxR){
+        if (dice <= maxR){  
             document.getElementById(`${resta}`).style.border = 'solid 5px rgb(214, 86, 118)';
+            opcion2=resta;
+        }else{ // si no, se vacía variable
+            opcion2="";
         }
         if (sMulti <= maxMs ){
             document.getElementById(`${sMulti}`).style.border = 'solid 5px rgb(214, 86, 118)';
+            opcion3=sMulti;
+        }else{ // si no, se vacía variable
+            opcion3="";
         }
-        if (rMulti<= maxMr){
+        if (rMulti>0){
             document.getElementById(`${sMulti}`).style.border = 'solid 5px rgb(214, 86, 118)';
+            opcion4=rMulti;
+        }else{ // si no, se vacía variable
+            opcion4="";
         }
+        // ids de las opciones de movimiento
+        console.log("opcion1: "+opcion1);
+        console.log("opcion2: "+opcion2);
+        console.log("opcion3: "+opcion3);
+        console.log("opcion4: "+opcion4);
+
+        // cuand opinches en 1 opcion buen giras y reseteas los borde
+        // evento que cuando clickes en celda cambie la imagen si la celda es una de las ociones buenas
+        document.getElementById().addEventListener("click", cambiarImagen); // cuando clica encima de una opcion cambia la imagen
+
+        // MANDAR IDS DE LAS OPCIONES POR PARAMETROS
+        //cambiarImagen(); // cambia imagen si hay coincidencia con la opcion de movimiento
 
     }
+    // ATASCADA EN COMO COMPARAR LA CELDA ELEGIDA POR EL USUARIO Y LA OPCION MOVIMIENTO
+    // cambiar imagen si clica encima de una opcion, tiene que comprobar primero si corresponde a una opcion valida comparando ids
+    // let cambiarImagen=()=>{
+    //     let imagenId = this.getAttribute("id");
+    //     celdaElegida.push(imagTablero[celdaId].name);
+    //     celdaElegidaId.push(celdaId);
+    //     this.setAttribute("src", imagTablero[celdaId].img);
+    //     //contador++;
+    //     document.querySelector("#contador").textContent = contador;
+    //     // if (celdaElegida.length === 1) {
+    //     // coincidencia();
+    // }
+
+     // Comprueba si coincide la celda que ha elegido el jugador con alguna opcion valida
+    // let coincidencia = () => {
+    //     let celdas = document.querySelectorAll("td");
+    //     const opcionUsu = celdaElegida[0];
+    //     let celda = celdas[opcionUsu];
+
+    //     // Si las dos cartas elegidas son iguales
+    //     if ((opcionUsu === opcionMov[0]) || (opcionUsu === opcionMov[0]) || (opcionUsu === opcionMov[1]) || (opcionUsu === opcionMov[2]) || (opcionUsu === opcionMov[3])) {
+
+    //         celda.setAttribute("src", imagTablero[0].img); // cambia a pirata como si avanzara
+            
+            
+    //         carta1.removeEventListener("click", girarCarta); // Deja de dar la opción de girar la carta
+    //         carta2.removeEventListener("click", girarCarta);
+    //         carta1.classList.add("miestilo"); // aplica estilos
+    //         carta2.classList.add("miestilo");
+    //         carta1.style.border = "3px solid black"
+    //         carta2.style.border = "3px solid black"
+    //         cartasGanadas.push(cartasElegidas);
+    //     // Si las dos cartas elegidas son diferentes
+    //     } else {
+    //         setTimeout(() => {
+
+    //             carta1.setAttribute("src", "./images/colors.svg"); 
+    //             carta2.setAttribute("src", "./images/colors.svg");
+    //             carta1.classList.add("miestilo");
+    //             carta2.classList.add("miestilo");
+    //         }, 500);
+    //     }
+
+    //     cartasElegidas = [];
+    //     cartasElegidasId = [];
+
+    //     verResultado.textContent = cartasGanadas.length;
+    //     if (cartasGanadas.length === arrayCartas.length / 2) {
+    //         //la alerta aparece
+    //         document.getElementById("alerta").style.display = "block"
+    //     }
+    // }
+
+
+
         // cuando pulse tirar dado 
         document.getElementById("dado").addEventListener('click', modifDado, false); 
-   
+
     //let celdaH = 
     crearTablero();
     crearDado();
