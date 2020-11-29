@@ -88,6 +88,10 @@ let partida = () =>{
     // boton introducir nombre se esconde
     document.getElementById("enviar").style.display = "none";
 
+    // contador de tiradas
+    let contador = 0;
+    document.querySelector("#contador").textContent = contador;
+
     // imagenes
     const pirata = {
         name: "pirata",
@@ -176,10 +180,8 @@ let partida = () =>{
         let cofre = document.getElementById('99'); // celda con id 99
         let imagenH = heroina.getElementsByTagName('img'); // array
         let imagenC = cofre.getElementsByTagName('img'); // array
-        imagenH[0].setAttribute("src", imagTablero[0].img) ; // casilla con imagen de pirata
-        imagenC[0].setAttribute("src", imagTablero[2].img) ; // casilla con imagen de cofre cerrado
-
-        return heroina.id;
+        imagenH[0].setAttribute("src", pirata.img) ; // casilla con imagen de pirata
+        imagenC[0].setAttribute("src", cofreLock.img) ; // casilla con imagen de cofre cerrado
 
     }
     document.getElementById("dado").style.display = "block"; // aparece el boton dado
@@ -223,12 +225,13 @@ let partida = () =>{
         }
 
     }
-
+    
     // 4. Opciones mover
     // obtener id celda y num dado para dar las opciones => (id celda +-num dado) [sino cambiar de decena] y id+-(num dado*10) [sin >99 ni < 0]
     let opcionesMov = (id, num) =>{
         // 15 celda
         //4 dado
+        document.getElementById("dado").style.display = "none"; // desaparece el boton dado
         console.log(id);
         let ella =  parseInt(id); // string a number
         let dice = num;
@@ -246,99 +249,92 @@ let partida = () =>{
         let opcion2;
         let opcion3;
         let opcion4;
+
         if (ella <= maxS ){
-            document.getElementById(`${suma}`).style.border = 'solid 5px rgb(214, 86, 118)';
+            document.getElementById(`${suma}`).style.border = 'solid 3px rgb(214, 86, 118)';
             opcion1 =suma;
             
         }else{ // si no, se vacía variable
             opcion1="";
         }
         if (dice <= maxR){  
-            document.getElementById(`${resta}`).style.border = 'solid 5px rgb(214, 86, 118)';
+            document.getElementById(`${resta}`).style.border = 'solid 3px rgb(214, 86, 118)';
             opcion2=resta;
         }else{ // si no, se vacía variable
             opcion2="";
         }
         if (sMulti <= maxMs ){
-            document.getElementById(`${sMulti}`).style.border = 'solid 5px rgb(214, 86, 118)';
+            document.getElementById(`${sMulti}`).style.border = 'solid 3px rgb(214, 86, 118)';
             opcion3=sMulti;
         }else{ // si no, se vacía variable
             opcion3="";
         }
         if (rMulti>0){
-            document.getElementById(`${sMulti}`).style.border = 'solid 5px rgb(214, 86, 118)';
+            document.getElementById(`${sMulti}`).style.border = 'solid 3px rgb(214, 86, 118)';
             opcion4=rMulti;
         }else{ // si no, se vacía variable
             opcion4="";
         }
-        // ids de las opciones de movimiento
+        // ids de las opciones de movimiento Pruebas
         console.log("opcion1: "+opcion1);
         console.log("opcion2: "+opcion2);
         console.log("opcion3: "+opcion3);
         console.log("opcion4: "+opcion4);
 
-        // cuand opinches en 1 opcion buen giras y reseteas los borde
+        // cuando pinches en 1 opcion buena cambias imagen por pirata y reseteas los borde
         // evento que cuando clickes en celda cambie la imagen si la celda es una de las ociones buenas
-        document.getElementById().addEventListener("click", cambiarImagen); // cuando clica encima de una opcion cambia la imagen
-
-        // MANDAR IDS DE LAS OPCIONES POR PARAMETROS
-        //cambiarImagen(); // cambia imagen si hay coincidencia con la opcion de movimiento
+        
+        if(document.getElementById(`${opcion1}`)!= null){
+            document.getElementById(`${opcion1}`).addEventListener("click", cambiarImagen);
+        }
+        if(document.getElementById(`${opcion2}`)!= null){
+            document.getElementById(`${opcion2}`).addEventListener('click', cambiarImagen);
+        }
+        if(document.getElementById(`${opcion3}`)!= null){
+            document.getElementById(`${opcion3}`).addEventListener('click', cambiarImagen);
+        }
+        if(document.getElementById(`${opcion4}`)!= null){
+            document.getElementById(`${opcion4}`).addEventListener('click', cambiarImagen);
+        }
+        
+        
+        
 
     }
     // ATASCADA EN COMO COMPARAR LA CELDA ELEGIDA POR EL USUARIO Y LA OPCION MOVIMIENTO
     // cambiar imagen si clica encima de una opcion, tiene que comprobar primero si corresponde a una opcion valida comparando ids
-    // let cambiarImagen=()=>{
-    //     let imagenId = this.getAttribute("id");
-    //     celdaElegida.push(imagTablero[celdaId].name);
-    //     celdaElegidaId.push(celdaId);
-    //     this.setAttribute("src", imagTablero[celdaId].img);
-    //     //contador++;
-    //     document.querySelector("#contador").textContent = contador;
-    //     // if (celdaElegida.length === 1) {
-    //     // coincidencia();
-    // }
+    
+    
+    let cambiarImagen=(e)=>{ 
 
-     // Comprueba si coincide la celda que ha elegido el jugador con alguna opcion valida
-    // let coincidencia = () => {
-    //     let celdas = document.querySelectorAll("td");
-    //     const opcionUsu = celdaElegida[0];
-    //     let celda = celdas[opcionUsu];
+        let posCeldaInicial = lugarHeroina();
+        let celdaInicial = document.getElementById(`${posCeldaInicial}`);
+        let imagInicial = celdaInicial.getElementsByTagName('img'); // array
+        imagInicial[0].setAttribute('src', grass.img)
 
-    //     // Si las dos cartas elegidas son iguales
-    //     if ((opcionUsu === opcionMov[0]) || (opcionUsu === opcionMov[0]) || (opcionUsu === opcionMov[1]) || (opcionUsu === opcionMov[2]) || (opcionUsu === opcionMov[3])) {
-
-    //         celda.setAttribute("src", imagTablero[0].img); // cambia a pirata como si avanzara
-            
-            
-    //         carta1.removeEventListener("click", girarCarta); // Deja de dar la opción de girar la carta
-    //         carta2.removeEventListener("click", girarCarta);
-    //         carta1.classList.add("miestilo"); // aplica estilos
-    //         carta2.classList.add("miestilo");
-    //         carta1.style.border = "3px solid black"
-    //         carta2.style.border = "3px solid black"
-    //         cartasGanadas.push(cartasElegidas);
-    //     // Si las dos cartas elegidas son diferentes
-    //     } else {
-    //         setTimeout(() => {
-
-    //             carta1.setAttribute("src", "./images/colors.svg"); 
-    //             carta2.setAttribute("src", "./images/colors.svg");
-    //             carta1.classList.add("miestilo");
-    //             carta2.classList.add("miestilo");
-    //         }, 500);
-    //     }
-
-    //     cartasElegidas = [];
-    //     cartasElegidasId = [];
-
-    //     verResultado.textContent = cartasGanadas.length;
-    //     if (cartasGanadas.length === arrayCartas.length / 2) {
-    //         //la alerta aparece
-    //         document.getElementById("alerta").style.display = "block"
-    //     }
-    // }
-
-
+        let idCeldaElegida = e.target.parentElement.getAttribute("id");
+        
+        if(idCeldaElegida === '99'){
+            alert("Heroína, has llegado al cofre en "+contador+" tiradas.");
+            let celdaFinal = document.getElementById(`${idCeldaElegida}`); // celda elegida
+            let imagFinal = celdaFinal.getElementsByTagName('img'); // array
+            imagFinal[0].setAttribute("src", cofreOpen.img);
+        }else{
+            let celdaElegida = document.getElementById(`${idCeldaElegida}`); // celda elegida
+            let imagEleccion = celdaElegida.getElementsByTagName('img'); // array
+            imagEleccion[0].setAttribute("src", pirata.img);
+        }
+  
+        // recorre el tablero y elimina bordes rojos
+        let tdArray = document.getElementsByTagName('td');
+        for(let i=0; i<tdArray.length; i++){
+            tdArray[i].removeEventListener('click', cambiarImagen); // desactiva eventos
+            tdArray[i].style.border = 'none';
+        }
+        document.getElementById("dado").style.display = "block"; // aparece el boton dado
+        contador++;
+        document.querySelector("#contador").textContent = contador;
+    }
 
         // cuando pulse tirar dado 
         document.getElementById("dado").addEventListener('click', modifDado, false); 
