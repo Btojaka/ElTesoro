@@ -319,6 +319,26 @@ let partida = () =>{
             let celdaFinal = document.getElementById(`${idCeldaElegida}`); // celda elegida
             let imagFinal = celdaFinal.getElementsByTagName('img'); // array
             imagFinal[0].setAttribute("src", cofreOpen.img);
+            
+            if(localStorage.getItem("recordTiradas")){
+
+                if (localStorage.getItem("recordTiradas") > contador ){
+                    //record
+                    alert("Récord superado con "+ contador + " tiradas");
+                }else if ( localStorage.getItem("recordTiradas")== contador){
+                     // igualas
+                     alert("Has igualado el récord con "+contador+" tiradas.");
+                }else{
+                    // no record
+                    alert("Récord no superado, el actual récord es: "+ localStorage.getItem("recordTiradas"));
+                }
+
+            }else{
+                localStorage.setItem("recordTiradas", contador);
+                alert("Has establecido nuevo récord con "+ contador + " tiradas." );
+
+            }
+
         }else{
             let celdaElegida = document.getElementById(`${idCeldaElegida}`); // celda elegida
             let imagEleccion = celdaElegida.getElementsByTagName('img'); // array
