@@ -10,9 +10,7 @@ window.onload= function(){
         console.log("recargando");
         //captura la respuesta introducida y la valida
         let validarNombre = () =>{
-            //alert("estoy validando");
             let elemento = document.getElementById("name");
-            //borrarError('errorName', elemento);
             if(!elemento.checkValidity()) {
                 if(elemento.validity.valueMissing){
                     error(elemento, "Debes introducir un nombre", 'errorName');
@@ -28,7 +26,6 @@ window.onload= function(){
             }
             return true;
         }
-
         let validacionFinal = () => {
             if(validarNombre()) {
                 return true;
@@ -43,51 +40,35 @@ window.onload= function(){
         let error = (elemento, mensaje, parrafo) => {
             document.getElementById(parrafo).innerHTML = mensaje;
             elemento.style.border = 'solid 2px rgb(214, 86, 118)';
-            //elemento.focus(); no hace falta
         }
 
         //función que llama a realizar validaciones
         let validar = (e) => {
-            //alert("START");
-            //validarNombre();
-            //validacionFinal()
             if (validacionFinal()){
-                //alert(validacionFinal);
                 solitictud();
             }
-            //alert("STOP");
         }
-         //el botón enviar inicia la función validar
 
-
-    
 let solitictud = () => {
      // se inicializa el objeto httpRequest para hacer la peticion al servidor
     let httpRequest= new XMLHttpRequest();
 
     // Abrimos la conexion
     httpRequest.open("POST", "https://apuntesfpinformatica.es/DWEC/entregable1-2.php", true); // servidor utilizado para la prácitca
-    //console.log(httpRequest);
 
     httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
-    //console.log(httpRequest);
-
     
     httpRequest.onreadystatechange=function(){ // estados por los que pasa la petición  
         
 
         if(httpRequest.readyState==2){
-           // alert("estoy en 2");
+
         }
         if(httpRequest.readyState==3){
-           // alert("estoy en 3");
         }
         if(httpRequest.readyState==4){
-            // alert("ya estoy en 4");
-            // alert(httpRequest.status);
+        
         if (httpRequest.status==200){
-
-           // alert(httpRequest.responseText+ " " + document.getElementById('name').value.length);
 
                 if(httpRequest.responseText === 'OK'){
                     document.getElementById("jugar").style.display = "block";
@@ -101,11 +82,7 @@ let solitictud = () => {
         }
     }
     httpRequest.send("nombre=" + document.getElementById('name').value); // lo que se envía al servidor
-    // alert(httpRequest.status);
-    // console.log(httpRequest);
-
 }
-
 
 let partida = () =>{
     // boton introducir nombre se esconde
@@ -176,7 +153,6 @@ let partida = () =>{
             document.getElementById("tablero").innerHTML = "";
         } 
     
-        
         let i_celda= 0;
         let table = document.createElement("table");
         tablero.appendChild(table);
@@ -198,10 +174,7 @@ let partida = () =>{
             } 
             //document.getElementById('0').           
         } 
-
-        /////////******CAMBIO PRUEBA*******/////////
-        let heroina = document.getElementById('15'); // celda con id 0
-        //console.log(heroina.id); // pruebas
+        let heroina = document.getElementById('0'); // celda con id 0
         let cofre = document.getElementById('99'); // celda con id 99
         let imagenH = heroina.getElementsByTagName('img'); // array
         let imagenC = cofre.getElementsByTagName('img'); // array
@@ -225,28 +198,47 @@ let partida = () =>{
         imgDado.setAttribute("id", "iDado" )
         padreDado.appendChild(imgDado);
     }
-
+    // 3 saca numero aleatorio y cambia la imagen del dado
     let modifDado = () =>{
         let imgDado = document.getElementById('iDado');
         let numero = Math.floor(Math.random() * (7 - 1)) + 1;
         imgDado.setAttribute("src", dado[numero-1].img);
 
         console.log("dentro de modificar: " + numero);
-        return numero; // devuelve el numero que sale en el dado
+        
+        let idH = parseInt(lugarHeroina());
+        opcionesMov(idH, numero);
 
     }
-    
-    // 4. Opciones mover
+    // devuelve el id del lugar donde se encunentra la heroína
+    let lugarHeroina = () => {
+        let lugarI = document.getElementsByTagName('img');
+        for(let i =0; i<lugarI.length; i++){
+            console.log(lugarI[i].src);
+            let busca = lugarI[i].src.search("/images/piratilla.png");
+            if (busca != -1){
 
+             let idPadre = lugarI[i].parentElement.id; // devuelve id del elemento padre de lugarI[i]
+             console.log("padre: "+idPadre);
+                return idPadre;
+            }
+        }
+
+    }
+
+    // 4. Opciones mover
     // obtener id celda y num dado para dar las opciones => (id celda +-num dado) [sino cambiar de decena] y id+-(num dado*10) [sin >99 ni < 0]
     let opcionesMov = (id, num) =>{
         // 15 celda
         //4 dado
+        console.log(id);
         let ella =  parseInt(id); // string a number
         let dice = num;
 
         // operaciones con las que se obtienen los id de las celdas donde puede moverse la heroína
         let suma = ella + dice; // 19
+        console.log(dice); //num
+        console.log(ella); // nan
         console.log(suma);
         let resta = ella - dice;  // -1
         let sMulti = ella + (10 * dice); // 32
@@ -270,27 +262,12 @@ let partida = () =>{
             document.getElementById(`${sMulti}`).style.border = 'solid 5px rgb(214, 86, 118)';
         }
 
-
-
     }
-    ///////////// AQUI ESTA EL FALLO  ************************
-
-    let tirada = (id) =>{
-        // guarda numero del dado en un a variable (NO GUARDA UN NUMERO)
-        //let numDado =  
+        // cuando pulse tirar dado 
         document.getElementById("dado").addEventListener('click', modifDado, false); 
-        let pruebaDado= 4;
-        let idH = id;
-        // console.log("idH: "+idH);
-        // console.log("numDado =  " +numDado);
-        opcionesMov(idH, pruebaDado); // CAMBIAR A numDado
-    }
-
+   
     //let celdaH = 
-    let idHeroina = crearTablero();
+    crearTablero();
     crearDado();
-    tirada(idHeroina)
-    // cuando pulse tirar dado 
-      
 }
 
