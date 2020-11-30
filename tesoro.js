@@ -23,6 +23,7 @@ window.onload= function(){
             }
             return true;
         }
+
         let validacionFinal = () => {
             if(validarNombre()) {
                 return true;
@@ -82,9 +83,9 @@ let solitictud = () => {
 }
 
 let partida = () =>{
+    
     // boton introducir nombre se esconde
     document.getElementById("enviar").style.display = "none";
-
     // contador de tiradas
     let contador = 0;
     document.querySelector("#contador").textContent = contador;
@@ -317,19 +318,25 @@ let partida = () =>{
             let celdaElegida = document.getElementById(`${idCeldaElegida}`); // celda elegida
             let imagEleccion = celdaElegida.getElementsByTagName('img'); // array
             imagEleccion[0].setAttribute("src", pirata.img);
+           
+            }
+
+             // recorre el tablero y elimina bordes rojos
+            
+             let tdArray = document.getElementsByTagName('td');
+             for(let i=0; i<tdArray.length; i++){
+                 tdArray[i].removeEventListener('click', cambiarImagen); // desactiva eventos
+
+                 tdArray[i].style.border = 'none';
         }
-        // recorre el tablero y elimina bordes rojos
-        let tdArray = document.getElementsByTagName('td');
-        for(let i=0; i<tdArray.length; i++){
-            tdArray[i].removeEventListener('click', cambiarImagen); // desactiva eventos
-            tdArray[i].style.border = 'none';
-        }
+        
         document.getElementById("dado").style.display = "block"; // aparece el boton dado para volver a tirar
         
         document.querySelector("#contador").textContent = contador;
     }
         // cuando pulse tirar dado 
         document.getElementById("dado").addEventListener('click', modifDado, false); 
+        
     crearTablero();
     crearDado();
 }

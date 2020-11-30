@@ -103,6 +103,16 @@ input[type=submit] {
 }
 #dado{
     display:none;
+    padding: 0.5rem;
+    font-size: 1vw;
+    border-radius: 0.5rem;
+    width: 15%;
+    background-color:  rgb(167, 47, 189);
+    color: black;
+    
+    border: none;
+    cursor: pointer;
+    
 }
 #alerta {
     display: none;
@@ -111,7 +121,6 @@ input[type=submit] {
 }
 /* boton cuando está habilitado */
 #jugar:enabled{
-    /* display: flex; */
     padding: 0.5rem;
     font-weight: 100;
     font-size: 1vw;
