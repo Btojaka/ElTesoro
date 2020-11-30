@@ -8,7 +8,6 @@ window.onload= function(){
         //captura la respuesta introducida y la valida
         let validarNombre = () =>{
             let elemento = document.getElementById("name");
-            borrarError('errorName', elemento);
             if(!elemento.checkValidity()) {
                 if(elemento.validity.valueMissing){
                     error(elemento, "Debes introducir un nombre", 'errorName');
@@ -23,7 +22,6 @@ window.onload= function(){
             }
             return true;
         }
-
         let validacionFinal = () => {
             if(validarNombre()) {
                 return true;
@@ -37,15 +35,7 @@ window.onload= function(){
         let error = (elemento, mensaje, parrafo) => {
             document.getElementById(parrafo).innerHTML = mensaje;
             elemento.style.border = 'solid 2px rgb(214, 86, 118)';
-
         }
-
-        let borrarError = (parrafo, elemento) => {
-            document.getElementById(parrafo).innerHTML = "";
-            elemento.style.border = '1px solid #ccc';
-           
-          }
-
         //función que llama a realizar validaciones
         let validar = (e) => {
             if (validacionFinal()){
@@ -83,9 +73,9 @@ let solitictud = () => {
 }
 
 let partida = () =>{
-    
     // boton introducir nombre se esconde
     document.getElementById("enviar").style.display = "none";
+
     // contador de tiradas
     let contador = 0;
     document.querySelector("#contador").textContent = contador;
@@ -318,25 +308,19 @@ let partida = () =>{
             let celdaElegida = document.getElementById(`${idCeldaElegida}`); // celda elegida
             let imagEleccion = celdaElegida.getElementsByTagName('img'); // array
             imagEleccion[0].setAttribute("src", pirata.img);
-           
-            }
-
-             // recorre el tablero y elimina bordes rojos
-            
-             let tdArray = document.getElementsByTagName('td');
-             for(let i=0; i<tdArray.length; i++){
-                 tdArray[i].removeEventListener('click', cambiarImagen); // desactiva eventos
-
-                 tdArray[i].style.border = 'none';
         }
-        
+        // recorre el tablero y elimina bordes rojos
+        let tdArray = document.getElementsByTagName('td');
+        for(let i=0; i<tdArray.length; i++){
+            tdArray[i].removeEventListener('click', cambiarImagen); // desactiva eventos
+            tdArray[i].style.border = 'none';
+        }
         document.getElementById("dado").style.display = "block"; // aparece el boton dado para volver a tirar
         
         document.querySelector("#contador").textContent = contador;
     }
         // cuando pulse tirar dado 
         document.getElementById("dado").addEventListener('click', modifDado, false); 
-        
     crearTablero();
     crearDado();
 }

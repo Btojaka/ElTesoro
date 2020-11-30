@@ -12,7 +12,7 @@ body {
     background: linear-gradient(rgb(30, 6, 241), rgb(231, 136, 28), #ffff)
 }
 
-.medio {
+#medio {
     margin: 1rem 0rem;
     min-width: 90vw;
     min-height: 100vh;
@@ -20,20 +20,17 @@ body {
     box-shadow:  8px 8px 14px rgb(105, 126, 184);
     border-radius: 0.5rem;
     display: flex;
-    justify-content: center;
-    align-items: center;
     flex-direction: column;
+    align-items: center;
     color: rgb(105, 126, 184);
     font-weight: 500;
 }
 
-.arriba {
-    display: flex;
-    justify-content: space-between;
-    align-items:center;
+#arriba {
+    
     padding: 0.5rem;
     line-height: 1.5;
-    min-width: 90vw;
+    width: 40vw;
 }
 
 label {
@@ -41,7 +38,7 @@ label {
 }
 
 input[type=text] {
- width: 40%;
+ width: 100%;
   padding: 8px 16px;
   margin: 4px 0;
   display: inline-block;
@@ -65,7 +62,7 @@ h2 {
 }
 
 input[type=submit] {
-    width: 25%;
+    width: 70%;
     display: block;
     margin: auto;
     margin-top: 1rem;
@@ -103,16 +100,6 @@ input[type=submit] {
 }
 #dado{
     display:none;
-    padding: 0.5rem;
-    font-size: 1vw;
-    border-radius: 0.5rem;
-    width: 15%;
-    background-color:  rgb(167, 47, 189);
-    color: black;
-    
-    border: none;
-    cursor: pointer;
-    
 }
 #alerta {
     display: none;
@@ -121,6 +108,7 @@ input[type=submit] {
 }
 /* boton cuando está habilitado */
 #jugar:enabled{
+    display: flex;
     padding: 0.5rem;
     font-weight: 100;
     font-size: 1vw;
@@ -148,7 +136,7 @@ input[type=submit] {
 /* contador, temporizador y resultado */
 .abajo {
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     max-width: 20vw;
 }
