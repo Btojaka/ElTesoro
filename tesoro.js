@@ -23,7 +23,7 @@ window.onload= function(){
             }
             return true;
         }
-        let validacionFinal = () => {
+        let validacionFinal = (e) => {
             if(validarNombre()) {
                 return true;
             } else {
@@ -45,7 +45,7 @@ window.onload= function(){
           }
 
         //función que llama a realizar validaciones
-        let validar = (e) => {
+        let validar = () => {
             if (validacionFinal()){
                 solitictud();
             }
@@ -83,6 +83,8 @@ let solitictud = () => {
 let partida = () =>{
     // boton introducir nombre se esconde
     document.getElementById("enviar").style.display = "none";
+    document.getElementById("jugar").removeEventListener('click', partida, false); 
+    
 
     // contador de tiradas
     let contador = 0;
@@ -214,7 +216,6 @@ let partida = () =>{
     }    
     // 4. Opciones mover
     let opcionesMov = (id, num) =>{
-
         document.getElementById("dado").style.display = "none"; // desaparece el boton dado para que no pueda volver a pulsarlo
         let ella = id;
         let cadenaElla = String(ella); // para poder coger el ultimo caracter, debe ser un string
