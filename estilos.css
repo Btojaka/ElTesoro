@@ -12,7 +12,7 @@ body {
     background: linear-gradient(rgb(30, 6, 241), rgb(231, 136, 28), #ffff)
 }
 
-#medio {
+.medio {
     margin: 1rem 0rem;
     min-width: 90vw;
     min-height: 100vh;
@@ -20,17 +20,20 @@ body {
     box-shadow:  8px 8px 14px rgb(105, 126, 184);
     border-radius: 0.5rem;
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
+    flex-direction: column;
     color: rgb(105, 126, 184);
     font-weight: 500;
 }
 
-#arriba {
-    
+.arriba {
+    display: flex;
+    justify-content: space-between;
+    align-items:center;
     padding: 0.5rem;
     line-height: 1.5;
-    width: 40vw;
+    min-width: 90vw;
 }
 
 label {
@@ -38,7 +41,7 @@ label {
 }
 
 input[type=text] {
- width: 100%;
+ width: 40%;
   padding: 8px 16px;
   margin: 4px 0;
   display: inline-block;
@@ -62,7 +65,7 @@ h2 {
 }
 
 input[type=submit] {
-    width: 70%;
+    width: 25%;
     display: block;
     margin: auto;
     margin-top: 1rem;
@@ -108,7 +111,7 @@ input[type=submit] {
 }
 /* boton cuando está habilitado */
 #jugar:enabled{
-    display: flex;
+    /* display: flex; */
     padding: 0.5rem;
     font-weight: 100;
     font-size: 1vw;
@@ -136,7 +139,7 @@ input[type=submit] {
 /* contador, temporizador y resultado */
 .abajo {
     display: flex;
-    justify-content: space-around;
+    justify-content: center;
     align-items: center;
     max-width: 20vw;
 }

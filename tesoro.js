@@ -8,6 +8,7 @@ window.onload= function(){
         //captura la respuesta introducida y la valida
         let validarNombre = () =>{
             let elemento = document.getElementById("name");
+            borrarError('errorName', elemento);
             if(!elemento.checkValidity()) {
                 if(elemento.validity.valueMissing){
                     error(elemento, "Debes introducir un nombre", 'errorName');
@@ -35,7 +36,15 @@ window.onload= function(){
         let error = (elemento, mensaje, parrafo) => {
             document.getElementById(parrafo).innerHTML = mensaje;
             elemento.style.border = 'solid 2px rgb(214, 86, 118)';
+
         }
+
+        let borrarError = (parrafo, elemento) => {
+            document.getElementById(parrafo).innerHTML = "";
+            elemento.style.border = '1px solid #ccc';
+           
+          }
+
         //función que llama a realizar validaciones
         let validar = (e) => {
             if (validacionFinal()){
