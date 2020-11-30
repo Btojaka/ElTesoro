@@ -3,18 +3,14 @@ window.onload= function(){
     // cuando pulse enviar
     document.getElementById("enviar").addEventListener('click', validar, false);
     // cuando pulse jugar
-    document.getElementById("jugar").addEventListener('click', partida, false);
-    
+    document.getElementById("jugar").addEventListener('click', partida, false);   
 }
-
-        console.log("recargando");
         //captura la respuesta introducida y la valida
         let validarNombre = () =>{
             let elemento = document.getElementById("name");
             if(!elemento.checkValidity()) {
                 if(elemento.validity.valueMissing){
                     error(elemento, "Debes introducir un nombre", 'errorName');
-                    // hay que distinguir entre cuando faltan letras y cuanodo aparecen numeros
                 }else if(elemento.validity.patternMismatch){
                     if(elemento.value.length<4){
                         alert("EL nombre debe tener más de 4 letras");
@@ -33,15 +29,13 @@ window.onload= function(){
             //cancela el evento (enviar a servidor) si la validación es false
             e.preventDefault();
             return false;
+            }
         }
-        }
-
             //error debajo del input y cambio de borde en input
         let error = (elemento, mensaje, parrafo) => {
             document.getElementById(parrafo).innerHTML = mensaje;
             elemento.style.border = 'solid 2px rgb(214, 86, 118)';
         }
-
         //función que llama a realizar validaciones
         let validar = (e) => {
             if (validacionFinal()){
@@ -59,26 +53,20 @@ let solitictud = () => {
     httpRequest.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
     
     httpRequest.onreadystatechange=function(){ // estados por los que pasa la petición  
-        
 
-        if(httpRequest.readyState==2){
-
-        }
-        if(httpRequest.readyState==3){
-        }
         if(httpRequest.readyState==4){
         
-        if (httpRequest.status==200){
+            if (httpRequest.status==200){
 
                 if(httpRequest.responseText === 'OK'){
                     document.getElementById("jugar").style.display = "block";
                     document.getElementById("jugar").disabled = false;
-                  //  alert(document.getElementById('name').value);
+                //  alert(document.getElementById('name').value);
                     document.getElementById('nom').innerHTML = document.getElementById('name').value;
                 }else{
                     alert("Numero de letras debe ser impar");
                 }
-        } 
+            }
         }
     }
     httpRequest.send("nombre=" + document.getElementById('name').value); // lo que se envía al servidor
@@ -137,13 +125,6 @@ let partida = () =>{
     // tablero
     let tablero = document.querySelector(".tablero");
 
-    // 1. Crear tablero 
-    const imagTablero = [
-        pirata,
-        grass,
-        cofreLock
-    ]
-
     const dado = [
         face1,
         face2,
@@ -152,12 +133,16 @@ let partida = () =>{
         face5,
         face6
     ]
+
+    // 1. crear el tablero
     let crearTablero = () => {
+        // si hay un tablero lo borra
         if(document.getElementById("tablero")){
             document.getElementById("tablero").innerHTML = "";
         } 
     
         let i_celda= 0;
+        // crea la tabla con las celdas y a las celdas les pone la imagen grass
         let table = document.createElement("table");
         tablero.appendChild(table);
 
@@ -169,15 +154,15 @@ let partida = () =>{
                 let imagen = document.createElement("img");
                 celda.setAttribute("id", i_celda);
                 imagen.classList.add("miestilo");
-                imagen.setAttribute("src", imagTablero[1].img);
+                imagen.setAttribute("src", grass.img);
                 fila.appendChild(celda);
                 celda.appendChild(imagen);
                 i_celda++;
-            } 
-            //document.getElementById('0').           
+            }           
         } 
-        let heroina = document.getElementById('0'); // celda con id 0
-        let cofre = document.getElementById('99'); // celda con id 99
+        // en las celdas 0 y 99 se cambia la imagen grass por la de pirata y cofreLock
+        let heroina = document.getElementById('0'); 
+        let cofre = document.getElementById('99'); 
         let imagenH = heroina.getElementsByTagName('img'); // array
         let imagenC = cofre.getElementsByTagName('img'); // array
         imagenH[0].setAttribute("src", pirata.img) ; // casilla con imagen de pirata
@@ -187,7 +172,7 @@ let partida = () =>{
     document.getElementById("dado").style.display = "block"; // aparece el boton dado
     let padreDado = document.getElementById("padreDado");
 
-    // 2. creo dado 
+    // 2. crea dado 
     let crearDado = () =>{
         
         document.getElementById("padreDado").innerHTML="";
@@ -204,8 +189,6 @@ let partida = () =>{
         let numero = Math.floor(Math.random() * (7 - 1)) + 1;
         imgDado.setAttribute("src", dado[numero-1].img);
 
-        console.log("dentro de modificar: " + numero);
-        
         let idH = parseInt(lugarHeroina());
         opcionesMov(idH, numero);
 
@@ -214,76 +197,58 @@ let partida = () =>{
     let lugarHeroina = () => {
         let lugarI = document.getElementsByTagName('img');
         for(let i =0; i<lugarI.length; i++){
-            console.log(lugarI[i].src);
-            let busca = lugarI[i].src.search("/images/piratilla.png");
+            let busca = lugarI[i].src.search("/images/piratilla.png"); // busca la imagen en el array de imagenes
             if (busca != -1){
-
-            let idPadre = lugarI[i].parentElement.id; // devuelve id del elemento padre de lugarI[i]
-            console.log("padre: "+idPadre);
-            return idPadre;
+                let idPadre = lugarI[i].parentElement.id; // devuelve id del elemento padre de lugarI[i]
+                return idPadre;
             }
         }
-
-    }
-    
+    }    
     // 4. Opciones mover
-    // obtener id celda y num dado para dar las opciones => (id celda +-num dado) [sino cambiar de decena] y id+-(num dado*10) [sin >99 ni < 0]
     let opcionesMov = (id, num) =>{
-        // 15 celda
-        //4 dado
-        document.getElementById("dado").style.display = "none"; // desaparece el boton dado
-        console.log(id);
-        let ella =  parseInt(id); // string a number
-        let dice = num;
 
+        document.getElementById("dado").style.display = "none"; // desaparece el boton dado para que no pueda volver a pulsarlo
+        let ella = id;
+        let cadenaElla = String(ella); // para poder coger el ultimo caracter, debe ser un string
+        let dice = num;      
+        let posicion= cadenaElla.substr(cadenaElla.length - 1);
         // operaciones con las que se obtienen los id de las celdas donde puede moverse la heroína
-        let suma = ella + dice; // 19
-        let resta = ella - dice;  // -1
-        let sMulti = ella + (10 * dice); // 32
-        let rMulti = ella - (10 * dice); // 
-        let maxS = 10-(ella+1); // 19  // esta mal hecha
-        let maxR = ella; // 2
-        let maxMs =  ella + 10 * (10-(ella+1)); //72
-        //let maxMr = 10*ella; // no esta bien
+        let suma = ella + dice; 
+        let resta = ella - dice;  
+        let sMulti = ella + (10 * dice); 
+        let rMulti = ella - (10 * dice);          
         let opcion1;
         let opcion2;
         let opcion3;
         let opcion4;
 
-        if (ella <= maxS ){
+        if ((parseInt(posicion) + dice) <= 9 ){
             document.getElementById(`${suma}`).style.border = 'solid 3px rgb(214, 86, 118)';
             opcion1 =suma;
             
-        }else{ // si no, se vacía variable
+        }else{ // cuando es una opcion no válida
             opcion1="";
         }
-        if (dice <= maxR){  
+        if (parseInt(posicion) > dice){  
             document.getElementById(`${resta}`).style.border = 'solid 3px rgb(214, 86, 118)';
             opcion2=resta;
-        }else{ // si no, se vacía variable
+        }else{ // cuando es una opcion no válida
             opcion2="";
         }
-        if (sMulti <= maxMs ){
+        if (sMulti <= 99 ){
             document.getElementById(`${sMulti}`).style.border = 'solid 3px rgb(214, 86, 118)';
             opcion3=sMulti;
-        }else{ // si no, se vacía variable
+        }else{ // cuando es una opcion no válida
             opcion3="";
         }
-        if (rMulti>0){
-            document.getElementById(`${sMulti}`).style.border = 'solid 3px rgb(214, 86, 118)';
+        if (rMulti>=0){
+            document.getElementById(`${rMulti}`).style.border = 'solid 3px rgb(214, 86, 118)';
             opcion4=rMulti;
-        }else{ // si no, se vacía variable
+        }else{ // cuando es una opcion no válida
             opcion4="";
         }
-        // ids de las opciones de movimiento Pruebas
-        console.log("opcion1: "+opcion1);
-        console.log("opcion2: "+opcion2);
-        console.log("opcion3: "+opcion3);
-        console.log("opcion4: "+opcion4);
 
-        // cuando pinches en 1 opcion buena cambias imagen por pirata y reseteas los borde
-        // evento que cuando clickes en celda cambie la imagen si la celda es una de las ociones buenas
-        
+        // evento que cuando cliques en celda de las ociones buenas llama a cambiarImagen      
         if(document.getElementById(`${opcion1}`)!= null){
             document.getElementById(`${opcion1}`).addEventListener("click", cambiarImagen);
         }
@@ -296,15 +261,10 @@ let partida = () =>{
         if(document.getElementById(`${opcion4}`)!= null){
             document.getElementById(`${opcion4}`).addEventListener('click', cambiarImagen);
         }
-        
-        
-        
-
     }
-    // ATASCADA EN COMO COMPARAR LA CELDA ELEGIDA POR EL USUARIO Y LA OPCION MOVIMIENTO
-    // cambiar imagen si clica encima de una opcion, tiene que comprobar primero si corresponde a una opcion valida comparando ids
-    
-    
+    // cambia imagen si clica encima de una opcion y desactiva los demas eventos. También comprueba si el juego ha acabado y muestra mensajes
+    // de records, pone el contador de tiradas en marcha 
+
     let cambiarImagen=(e)=>{ 
 
         let posCeldaInicial = lugarHeroina();
@@ -314,7 +274,10 @@ let partida = () =>{
 
         let idCeldaElegida = e.target.parentElement.getAttribute("id");
         
+        //6. final de juego
         if(idCeldaElegida === '99'){
+            document.getElementById("dado").style.display = "none"; // desaparece boton dado porque ya no es necesario
+            contador++;
             alert("Heroína, has llegado al cofre en "+contador+" tiradas.");
             let celdaFinal = document.getElementById(`${idCeldaElegida}`); // celda elegida
             let imagFinal = celdaFinal.getElementsByTagName('img'); // array
@@ -338,29 +301,26 @@ let partida = () =>{
                 alert("Has establecido nuevo récord con "+ contador + " tiradas." );
 
             }
-
+            // 5. mover a la pirata por el tablero
         }else{
+            // suma movimientos a contador
+            contador++;
             let celdaElegida = document.getElementById(`${idCeldaElegida}`); // celda elegida
             let imagEleccion = celdaElegida.getElementsByTagName('img'); // array
             imagEleccion[0].setAttribute("src", pirata.img);
         }
-  
         // recorre el tablero y elimina bordes rojos
         let tdArray = document.getElementsByTagName('td');
         for(let i=0; i<tdArray.length; i++){
             tdArray[i].removeEventListener('click', cambiarImagen); // desactiva eventos
             tdArray[i].style.border = 'none';
         }
-        document.getElementById("dado").style.display = "block"; // aparece el boton dado
-        contador++;
+        document.getElementById("dado").style.display = "block"; // aparece el boton dado para volver a tirar
+        
         document.querySelector("#contador").textContent = contador;
     }
-
         // cuando pulse tirar dado 
         document.getElementById("dado").addEventListener('click', modifDado, false); 
-
-    //let celdaH = 
     crearTablero();
     crearDado();
 }
-
